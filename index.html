@@ -59,8 +59,12 @@ background:radial-gradient(800px 400px at 80% -10%,rgba(79,195,247,.35),transpar
 .red{background:linear-gradient(135deg,#c62828,#ef5350);transform:rotate(135deg)}
 .vwrap{width:100%;max-width:600px}
 .vwrap iframe,.vwrap video{width:100%;aspect-ratio:16/9;border:0;border-radius:14px;background:#000}
+.adslot{margin:18px 0;text-align:center;overflow:hidden}
+.ad728{display:none}
+@media(min-width:780px){.ad728{display:block;width:728px;max-width:100vw;position:relative;left:50%;transform:translateX(-50%);overflow:visible}}
 footer{text-align:center;opacity:.6;font-size:12px;margin-top:34px}
 </style>
+<!-- AD-HEAD: ad network er head script ekhane bosao -->
 </head>
 <body>
 <div class="wrap">
@@ -70,15 +74,48 @@ footer{text-align:center;opacity:.6;font-size:12px;margin-top:34px}
     <p class="st" id="status"></p>
     <p class="sb" id="pSub"></p>
     <div class="wacard">
-      <div class="watxt"><span class="waic">&#128172;</span><b>WhatsApp Me</b></div>
+      <div class="watxt"><span class="waic">&#128172;</span><b>WhatsApp e call ba message korun</b></div>
       <a class="wabtn" id="aWaMain" target="_blank" rel="noopener">View Message &rarr;</a>
     </div>
     <button class="pbtn" id="openBtn">&#128222; Call Now</button>
   </div>
 
+  <!-- AD-1: Banner 300x250 -->
+  <div class="adslot" id="ad1">
+<script>
+  atOptions = {
+    'key' : 'ea244df04b8061d6e28b8ff0f0e3b932',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script src="https://beastlyfluke.com/ea244df04b8061d6e28b8ff0f0e3b932/invoke.js"></script>
+</div>
+
   <div class="sec">My Video Collection</div>
   <div class="chips" id="chips"></div>
   <div class="grid" id="grid"></div>
+  <!-- AD-2: Native Banner -->
+  <div class="adslot" id="ad2">
+<script async="async" data-cfasync="false" src="https://beastlyfluke.com/6fd35f68616894b93e6a531e07b35c67/invoke.js"></script>
+<div id="container-6fd35f68616894b93e6a531e07b35c67"></div>
+</div>
+
+  <!-- AD-3: Banner 728x90 (shudhu computer/boro screen e dekhabe) -->
+  <div class="adslot ad728" id="ad3">
+<script>
+  atOptions = {
+    'key' : 'c970103d0d2ae21ec686b7b6d2fc8815',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://beastlyfluke.com/c970103d0d2ae21ec686b7b6d2fc8815/invoke.js"></script>
+</div>
   <footer id="foot"></footer>
 </div>
 
@@ -116,6 +153,7 @@ const ITEMS = [
   ["https://i.postimg.cc/sXbYCwXh/file-0000000077b4820ab61fdd5fa7c57bdd.png","Video title 3","Hot","https://beastlyfluke.com/twc5hihq7?key=b1d27abb2c8fda6ce10fd077f6ba1782","05:10"],
   ["https://i.postimg.cc/mgdFG8pF/file-000000008d24820a9d5a9ef5b82f0bac.png","Video title 4","Sexy","https://beastlyfluke.com/twc5hihq7?key=b1d27abb2c8fda6ce10fd077f6ba1782","" ],
 ];
+
 /* ========================================== */
 
 const COLORS={};const PAL=["#e53935","#8e24aa","#fb8c00","#00897b","#3949ab","#d81b60","#43a047","#039be5"];
@@ -124,7 +162,7 @@ $("pName").textContent=$("pName2").textContent=CONFIG.name;
 $("pSub").textContent=$("pSub2").textContent=CONFIG.subtitle;
 $("pPhoto").src=$("pPhoto2").src=CONFIG.photo;
 $("aCall").href="tel:"+CONFIG.phone;
-$("aWaMain").href="https://beastlyfluke.com/twc5hihq7?key=b1d27abb2c8fda6ce10fd077f6ba1782"+CONFIG.whatsapp;
+$("aWaMain").href="https://wa.me/"+CONFIG.whatsapp;
 const h=new Date().getHours(), on=h>=CONFIG.onlineFrom&&h<CONFIG.onlineTo;
 $("dot").className="dot"+(on?" on":"");
 $("status").className="st"+(on?" on":"");
@@ -154,5 +192,9 @@ cats.forEach(c=>{const b=document.createElement("button");b.className="chip"+(c=
   b.onclick=()=>{document.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));b.classList.add("on");render(c)};$("chips").appendChild(b)});
 render("All");
 </script>
+<!-- AD-BODY: Popunder ar Social Bar -->
+<script src="https://beastlyfluke.com/b7/8e/59/b78e591db7b2a1b413c9403bff5d98a8.js"></script>
+<script src="https://beastlyfluke.com/4b/7d/0d/4b7d0da2a89e4c3034e8d17813ab5c66.js"></script>
+
 </body>
 </html>
