@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Call Me</title>
+<style>
+:root{--b1:#061a45;--b2:#0d47a1;--b3:#1e88e5;--b4:#4fc3f7;--glass:rgba(255,255,255,.12);--line:rgba(255,255,255,.22)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#fff;min-height:100vh;
+background:radial-gradient(800px 400px at 80% -10%,rgba(79,195,247,.35),transparent),linear-gradient(165deg,var(--b1),var(--b2) 60%,var(--b3));background-attachment:fixed;padding:22px 14px 50px}
+.wrap{max-width:520px;margin:0 auto}
+.profile{display:flex;align-items:center;gap:14px;background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(10px);border-radius:20px;padding:14px}
+.profile img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:3px solid var(--b4);background:#2a4a85}
+.profile .info{flex:1;min-width:0}
+.profile h1{font-size:18px}
+.profile p{font-size:13px;opacity:.8;margin-top:2px}
+.pbtn{border:0;border-radius:14px;padding:11px 16px;font-weight:700;font-size:14px;color:var(--b2);background:#fff;cursor:pointer}
+.hero{background:linear-gradient(180deg,#fff,#e6f1ff);color:#12263f;border-radius:26px;padding:26px 18px 20px;text-align:center;box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.ava{position:relative;width:118px;height:118px;margin:0 auto 10px}
+.ava img{width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 0 0 3px var(--b3);background:#dde8f7}
+.dot{position:absolute;right:6px;bottom:6px;width:22px;height:22px;border-radius:50%;border:3px solid #fff;background:#9aa5b5}
+.dot.on{background:#22c55e;animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.6)}70%{box-shadow:0 0 0 10px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
+.hero h1{font-size:22px}
+.st{font-size:14px;font-weight:700;color:#7a8799;margin-top:4px}.st.on{color:#16a34a}
+.sb{font-size:13px;color:#5a6b85;margin:4px 0 16px}
+.wacard{background:#fff;border-radius:20px;padding:16px 14px;box-shadow:0 4px 14px rgba(13,71,161,.12)}
+.watxt{display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;margin-bottom:12px}
+.waic{font-size:30px}
+.wabtn{display:block;text-decoration:none;color:#fff;font-weight:700;font-size:16px;padding:14px;border-radius:30px;background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 8px 18px rgba(5,150,105,.35)}
+.hero .pbtn{margin-top:14px;background:linear-gradient(135deg,var(--b2),var(--b3));color:#fff;width:100%}
+.sec{display:flex;align-items:center;gap:10px;margin:26px 2px 12px;font-size:17px;font-weight:700}
+.sec:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--glass);color:#fff;padding:7px 15px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer}
+.chip.on{background:#fff;color:var(--b2)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.item{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:3/4;background:#0b2a66;box-shadow:0 8px 20px rgba(0,0,0,.35);transition:transform .2s}
+.item.v{cursor:pointer}.item.v:hover{transform:translateY(-3px)}
+.item img{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;top:9px;left:9px;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;color:#fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.dur{position:absolute;top:9px;right:9px;font-size:11px;background:rgba(0,0,0,.6);padding:3px 7px;border-radius:8px}
+.play{position:absolute;inset:0;margin:auto;width:54px;height:54px;border-radius:50%;background:rgba(0,0,0,.5);border:2px solid #fff;backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;transition:.2s}
+.item.v:hover .play{background:var(--b3);transform:scale(1.08)}
+.play:after{content:"";border-left:16px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.title{position:absolute;left:0;right:0;bottom:0;padding:30px 12px 10px;font-size:13px;font-weight:600;background:linear-gradient(transparent,rgba(0,0,0,.8))}
+.overlay{position:fixed;inset:0;background:rgba(3,12,35,.78);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:18px;z-index:10}
+.overlay.show{display:flex}
+.card{background:linear-gradient(180deg,#fff,#e8f2ff);color:#12263f;border-radius:28px;width:100%;max-width:340px;min-height:500px;padding:44px 24px 34px;text-align:center;display:flex;flex-direction:column;align-items:center;animation:pop .3s ease;box-shadow:0 20px 50px rgba(0,0,0,.4)}
+@keyframes pop{from{transform:scale(.92);opacity:0}to{transform:scale(1);opacity:1}}
+.avatar{width:160px;height:160px;border-radius:50%;object-fit:cover;border:5px solid var(--b3);box-shadow:0 0 0 10px rgba(30,136,229,.15);margin-bottom:22px;background:#dde8f7}
+.card h3{font-size:24px}.card .sub{color:#5a6b85;font-size:14px;margin:6px 0 0}
+.actions{display:flex;gap:50px;margin-top:auto;padding-top:36px}
+.act{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:13px;color:#445}
+.rbtn{width:68px;height:68px;border-radius:50%;border:0;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;text-decoration:none;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.25)}
+.green{background:linear-gradient(135deg,#128c4a,#25d366)}
+.red{background:linear-gradient(135deg,#c62828,#ef5350);transform:rotate(135deg)}
+.vwrap{width:100%;max-width:600px}
+.vwrap iframe,.vwrap video{width:100%;aspect-ratio:16/9;border:0;border-radius:14px;background:#000}
+footer{text-align:center;opacity:.6;font-size:12px;margin-top:34px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="ava"><img id="pPhoto" alt=""><span class="dot" id="dot"></span></div>
+    <h1 id="pName"></h1>
+    <p class="st" id="status"></p>
+    <p class="sb" id="pSub"></p>
+    <div class="wacard">
+      <div class="watxt"><span class="waic">&#128172;</span><b>WhatsApp Me</b></div>
+      <a class="wabtn" id="aWaMain" target="_blank" rel="noopener">View Message &rarr;</a>
+    </div>
+    <button class="pbtn" id="openBtn">&#128222; Call Now</button>
+  </div>
+
+  <div class="sec">My Video Collection</div>
+  <div class="chips" id="chips"></div>
+  <div class="grid" id="grid"></div>
+  <footer id="foot"></footer>
+</div>
+
+<div class="overlay" id="popup">
+  <div class="card">
+    <img class="avatar" id="pPhoto2" alt="">
+    <h3 id="pName2"></h3>
+    <p class="sub" id="pSub2"></p>
+    <div class="actions">
+      <div class="act"><a class="rbtn green" id="aCall" aria-label="Call">&#128222;</a><small>Call</small></div>
+      <div class="act"><button class="rbtn red" id="closeBtn" aria-label="Cut">&#128222;</button><small>Cut</small></div>
+    </div>
+  </div>
+</div>
+<div class="overlay" id="vmodal"><div class="vwrap" id="vbox"></div></div>
+
+<script>
+/* ========== SHUDHU EI PART BODLAO ========== */
+const CONFIG = {
+  name: "Jahanra Islam",
+  subtitle: "Call Me",
+  photo: "https://i.postimg.cc/J0dQ0MPZ/Screenshot-2026-10-18-13-54-00-082-com-miui-gallery-jpg.jpg",
+  phone: "https://beastlyfluke.com/twc5hihq7?key=b1d27abb2c8fda6ce10fd077f6ba1782",
+  whatsapp: "https://beastlyfluke.com/twc5hihq7?key=b1d27abb2c8fda6ce10fd077f6ba1782",
+  videoCallLink: "https://beastlyfluke.com/twc5hihq7?key=b1d27abb2c8fda6ce10fd077f6ba1782",
+  onlineFrom: 0,    // 0 = sobshomoy (24 ghonta) online
+  onlineTo: 24,    // 24 = sobshomoy online
+};
+/* Prottek line: [image, title, category, video link, duration(optional)]
+   Video link thakle image-er upor play button AUTO boshbe.
+   Video link khali ("") hole play button ashbe na. */
+const ITEMS = [
+  ["https://i.postimg.cc/3rbjgrCs/file-00000000d7dc8243a5530dd3fc827ce5.png","Video title 1","XxVideo","https://beastlyfluke.com/twc5hihq7?key=b1d27abb2c8fda6ce10fd077f6ba1782","03:20"],
+  ["https://i.postimg.cc/LX8f1Gqm/file-000000004dec8243b53ea26c2524dd7d.png","Video title 2","18+","https://beastlyfluke.com/twc5hihq7?key=b1d27abb2c8fda6ce10fd077f6ba1782","02:45"],
+  ["https://i.postimg.cc/sXbYCwXh/file-0000000077b4820ab61fdd5fa7c57bdd.png","Video title 3","Hot","https://beastlyfluke.com/twc5hihq7?key=b1d27abb2c8fda6ce10fd077f6ba1782","05:10"],
+  ["https://i.postimg.cc/mgdFG8pF/file-000000008d24820a9d5a9ef5b82f0bac.png","Video title 4","Sexy","https://beastlyfluke.com/twc5hihq7?key=b1d27abb2c8fda6ce10fd077f6ba1782","" ],
+];
+/* ========================================== */
+
+const COLORS={};const PAL=["#e53935","#8e24aa","#fb8c00","#00897b","#3949ab","#d81b60","#43a047","#039be5"];
+const $=id=>document.getElementById(id);
+$("pName").textContent=$("pName2").textContent=CONFIG.name;
+$("pSub").textContent=$("pSub2").textContent=CONFIG.subtitle;
+$("pPhoto").src=$("pPhoto2").src=CONFIG.photo;
+$("aCall").href="tel:"+CONFIG.phone;
+$("aWaMain").href="https://beastlyfluke.com/twc5hihq7?key=b1d27abb2c8fda6ce10fd077f6ba1782"+CONFIG.whatsapp;
+const h=new Date().getHours(), on=h>=CONFIG.onlineFrom&&h<CONFIG.onlineTo;
+$("dot").className="dot"+(on?" on":"");
+$("status").className="st"+(on?" on":"");
+$("status").textContent=on?"● Online":"● Offline now";
+$("foot").textContent="© "+new Date().getFullYear()+" "+CONFIG.name;
+
+const popup=$("popup");
+$("closeBtn").onclick=()=>popup.classList.remove("show");
+$("openBtn").onclick=()=>popup.classList.add("show");
+setTimeout(()=>popup.classList.add("show"),400);
+
+function embed(u){const m=u.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/);
+  return m?`<iframe src="https://www.youtube.com/embed/${m[1]}?autoplay=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`:`<video src="${u}" controls autoplay playsinline></video>`}
+const vm=$("vmodal");
+vm.onclick=e=>{if(e.target===vm){vm.classList.remove("show");$("vbox").innerHTML=""}};
+
+const cats=["All",...new Set(ITEMS.map(i=>i[2]))];
+cats.slice(1).forEach((c,i)=>COLORS[c]=PAL[i%PAL.length]);
+function render(f){
+  $("grid").innerHTML="";
+  ITEMS.filter(i=>f==="All"||i[2]===f).forEach(([img,t,c,v,d])=>{
+    const el=document.createElement("div");el.className="item"+(v?" v":"");
+    el.innerHTML=`<img src="${img}" alt="${t}" loading="lazy"><span class="badge" style="background:${COLORS[c]}">${c}</span>${v&&d?`<span class="dur">${d}</span>`:""}${v?'<span class="play"></span>':""}<div class="title">${t}</div>`;
+    if(v)el.onclick=()=>{$("vbox").innerHTML=embed(v);vm.classList.add("show")};
+    $("grid").appendChild(el)})}
+cats.forEach(c=>{const b=document.createElement("button");b.className="chip"+(c==="All"?" on":"");b.textContent=c;
+  b.onclick=()=>{document.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));b.classList.add("on");render(c)};$("chips").appendChild(b)});
+render("All");
+</script>
+</body>
+</html>
